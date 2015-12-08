@@ -10,12 +10,13 @@
 if((Test-Path C:\whos_logged_in_where) -eq 0){
       New-Item -ItemType Directory -Path C:\whos_logged_in_where | Out-Null
       Write-Host "Created directory C:\whos_logged_in_where"
-
-      #Create todays file, add CSV headers
-      New-Item -ItemType File "C:\whos_logged_in_where\$((Get-Date).ToString('yyyy-MM-dd')).csv" | Out-Null
-      $line = "NetBios Name" + "," + "IP Address" + "," + "Users"
-      Write-Output $line | Out-File "C:\whos_logged_in_where\$((Get-Date).ToString('yyyy-MM-dd')).csv" -Encoding ASCII
 }
+
+#Create todays file, add CSV headers
+New-Item -ItemType File "C:\whos_logged_in_where\$((Get-Date).ToString('yyyy-MM-dd')).csv" -force | Out-Null
+$line = "NetBios Name" + "," + "IP Address" + "," + "Users"
+Write-Output $line | Out-File "C:\whos_logged_in_where\$((Get-Date).ToString('yyyy-MM-dd')).csv" -Encoding ASCII
+
 
 
 #Get list of AD computers, can filter on subnet
